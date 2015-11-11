@@ -32,4 +32,6 @@ with tf.Session() as sess:
 
   for step in range(1000):
     sess.run(train_step, feed_dict=feed_dict)
+    if step % 100 == 0:
+      print sess.run(cross_entropy, feed_dict=feed_dict)
 
