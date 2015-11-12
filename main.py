@@ -31,9 +31,10 @@ def training(loss):
 supervisor_labels_placeholder = tf.placeholder("float", [None, 3])
 input_placeholder = tf.placeholder("float", [None, 3])
 feed_dict={input_placeholder: input, supervisor_labels_placeholder: winning_hands}
-summary_writer = tf.train.SummaryWriter('data')
 
 with tf.Session() as sess:
+  summary_writer = tf.train.SummaryWriter('data', graph_def=sess.graph_def)
+
   output = inference(input_placeholder)
   loss = loss(output, supervisor_labels_placeholder)
   training_op = training(loss)
