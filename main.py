@@ -13,19 +13,22 @@ winning_hands = [
 ]
 
 def inference(input_placeholder):
-  W = tf.Variable(tf.zeros([3, 3]))
-  b = tf.Variable(tf.zeros([3]))
+  with tf.name_scope('inference') as scope:
+    W = tf.Variable(tf.zeros([3, 3]))
+    b = tf.Variable(tf.zeros([3]))
 
-  y = tf.nn.softmax(tf.matmul(input_placeholder, W) + b)
+    y = tf.nn.softmax(tf.matmul(input_placeholder, W) + b)
   return y
 
 def loss(output, supervisor_labels_placeholder):
-  cross_entropy = -tf.reduce_sum(supervisor_labels_placeholder * tf.log(output))
-  tf.scalar_summary("entropy", cross_entropy)
+  with tf.name_scope('loss') as scope:
+    cross_entropy = -tf.reduce_sum(supervisor_labels_placeholder * tf.log(output))
+    tf.scalar_summary("entropy", cross_entropy)
   return cross_entropy
 
 def training(loss):
-  train_step = tf.train.GradientDescentOptimizer(0.01).minimize(loss)
+  with tf.name_scope('training') as scope:
+    train_step = tf.train.GradientDescentOptimizer(0.01).minimize(loss)
   return train_step
 
 
