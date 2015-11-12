@@ -14,8 +14,8 @@ winning_hands = [
 
 def inference(input_placeholder):
   with tf.name_scope('inference') as scope:
-    W = tf.Variable(tf.zeros([3, 3]))
-    b = tf.Variable(tf.zeros([3]))
+    W = tf.Variable(tf.zeros([3, 3]), name="weight")
+    b = tf.Variable(tf.zeros([3]), name="bias")
 
     y = tf.nn.softmax(tf.matmul(input_placeholder, W) + b)
   return y
