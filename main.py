@@ -28,8 +28,8 @@ def training(loss):
   train_step = tf.train.GradientDescentOptimizer(0.01).minimize(loss)
   return train_step
 
-supervisor_labels_placeholder = tf.placeholder("float", [None, 3])
-input_placeholder = tf.placeholder("float", [None, 3])
+supervisor_labels_placeholder = tf.placeholder("float", [None, 3], name="supervisor_labels_placeholder")
+input_placeholder = tf.placeholder("float", [None, 3], name="input_labels_placeholder")
 feed_dict={input_placeholder: input, supervisor_labels_placeholder: winning_hands}
 
 with tf.Session() as sess:
